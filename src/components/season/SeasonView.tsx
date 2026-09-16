@@ -24,6 +24,20 @@ import { TransactionForm } from '@/features/transaction-form/TransactionForm';
 import type { Transaction } from '@/db/schema';
 import { SEASONS_FA, SEASON_MONTHS, JALALI_MONTHS_FA, jalaliMonth, todayJalaliParts, faNum, type Season, type DigitPref } from '@lib/jalali';
 import { formatToman } from '@lib/format';
+import Image from 'next/image';
+import type { StaticImageData } from 'next/image';
+
+import springImage from '../../../public/illustrations/spring.webp';
+import summerImage from '../../../public/illustrations/summer.webp';
+import autumnImage from '../../../public/illustrations/autumn.webp';
+import winterImage from '../../../public/illustrations/winter.webp';
+
+const SEASON_IMAGES: Record<Season, StaticImageData> = {
+  spring: springImage,
+  summer: summerImage,
+  autumn: autumnImage,
+  winter: winterImage,
+};
 
 const SEASON_HEADER_COLORS: Record<Season, { light: string; dark: string }> = {
   spring: { light: '#F9ECF1', dark: '#3C262F' },
@@ -168,9 +182,9 @@ export function SeasonView({ year, season, onBack }: SeasonViewProps) {
       </div>
 
       {/* Content */}
-      <div className="px-4 py-4 space-y-4 max-w-2xl md:max-w-4xl lg:max-w-5xl mx-auto pb-24">
+      <div className="flex flex-col px-4 py-4 gap-4 max-w-2xl md:max-w-4xl lg:max-w-5xl mx-auto pb-24 min-h-[calc(100vh-80px)]">
         {/* Month selector cards */}
-        <div className="space-y-2">
+        <div className="space-y-2 shrink-0">
           <div className="flex items-center justify-between px-1">
             <span className="text-xs font-semibold text-text-muted">انتخاب و تفکیک بر اساس ماه</span>
             {selectedMonth !== null && (
@@ -272,19 +286,26 @@ export function SeasonView({ year, season, onBack }: SeasonViewProps) {
 
 function EmptyState({ season }: { season: Season }) {
   const messages: Record<Season, string> = {
-    spring: 'هنوز چیزی برای بهار نداری 🌱', summer: 'تابستان خالیه — اولین درآمد تابستانی رو ثبت کن ☀️',
-    autumn: 'پاییز هنوز شروع نشده 🍂', winter: 'زمستان هنوز خالیه ❄️',
+    spring: 'هنوز چیزی برای بهار نداری',
+    summer: 'تابستان خالیه — اولین درآمد تابستانی رو ثبت کن',
+    autumn: 'پاییز هنوز شروع نشده',
+    winter: 'زمستان هنوز خالیه',
   };
+  
   return (
-    <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
-      <div className="text-4xl mb-3">{getSeasonEmoji(season)}</div>
-      <p className="text-sm text-text-muted">{messages[season]}</p>
+    <div className="flex-1 flex flex-col items-center justify-center pt-8 pb-4 text-center min-h-[40vh]">
+      <div className="w-full max-w-sm flex-1 relative flex items-center justify-center mb-6">
+        <Image 
+          src={SEASON_IMAGES[season]} 
+          alt={season}
+          className="w-full h-full object-contain dark:brightness-110"
+          style={{ maxHeight: '45vh' }}
+          unoptimized
+        />
+      </div>
+      <p className="text-[15px] font-medium text-text-muted">{messages[season]}</p>
     </div>
   );
-}
-
-function getSeasonEmoji(season: Season): string {
-  return { spring: '🌱', summer: '☀️', autumn: '🍂', winter: '❄️' }[season];
 }
 
 function FilterChip({ label, count, active, onClick, color, digits }: { label: string; count: number; active: boolean; onClick: () => void; color?: string; digits: DigitPref }) {
