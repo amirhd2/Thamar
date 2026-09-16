@@ -60,10 +60,11 @@ export function YearSwitcher({ years, selectedYear, onSelect, digits }: YearSwit
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="flex items-center gap-1 px-3 py-1.5 rounded-full text-sm font-medium transition-colors pressable"
+        className="flex items-center gap-1.5 px-4 py-2 rounded-[18px] text-[15px] font-bold transition-all pressable border border-black/5 dark:border-white/10"
         style={{
-          background: 'rgb(var(--brand-primary) / 0.10)',
+          background: 'linear-gradient(145deg, rgb(var(--surface-1)), rgb(var(--surface-2)))',
           color: 'rgb(var(--brand-primary))',
+          boxShadow: '0 4px 12px -2px rgb(var(--brand-primary) / 0.15), inset 0 2px 0 rgba(255,255,255,0.2)',
         }}
         aria-haspopup="listbox"
         aria-expanded={open}
@@ -74,7 +75,7 @@ export function YearSwitcher({ years, selectedYear, onSelect, digits }: YearSwit
           transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
           className="inline-flex"
         >
-          <ChevronDown size={14} strokeWidth={2.5} />
+          <ChevronDown size={16} strokeWidth={2.5} />
         </motion.span>
       </button>
 

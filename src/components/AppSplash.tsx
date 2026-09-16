@@ -16,6 +16,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import thamarIcon from '../../public/illustrations/icon.webp';
 
 const MIN_SPLASH_DURATION_MS = 1200;
 const MAX_SPLASH_TIMEOUT_MS = 2500;
@@ -69,7 +70,7 @@ export function AppSplash({ ready }: { ready: boolean }) {
             {/* App icon */}
             <div className="flex items-center justify-center mb-5">
               <Image
-                src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/icons/icon.png`}
+                src={thamarIcon}
                 alt="ثمر"
                 width={88}
                 height={88}

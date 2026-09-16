@@ -12,8 +12,12 @@
 
 import { useMemo, useState, lazy, Suspense } from 'react';
 import Image from 'next/image';
-import { Settings as SettingsIcon, BarChart3 } from 'lucide-react';
 import { YearSwitcher } from '@/components/dashboard/YearSwitcher';
+import thamarIcon from '../../public/illustrations/icon.webp';
+import thamarIconLargeLight from '../../public/illustrations/thamar.webp';
+import thamarIconLargeDark from '../../public/illustrations/thamar dark.png';
+import settingsIcon from '../../public/illustrations/settings.webp';
+import barChartIcon from '../../public/illustrations/bar chart.webp';
 import { SeasonCard } from '@/components/dashboard/SeasonCard';
 import { CountUp } from '@/components/dashboard/CountUp';
 import { Fab } from '@/components/dashboard/Fab';
@@ -194,7 +198,7 @@ function DashboardHeader({
     >
       <div className="flex items-center gap-2.5">
         <Image
-          src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/icons/icon.png`}
+          src={thamarIcon}
           alt="ثمر"
           width={36}
           height={36}
@@ -219,26 +223,32 @@ function DashboardHeader({
             type="button"
             onClick={onReportsClick}
             aria-label="گزارش‌ها"
-            className="w-9 h-9 rounded-full flex items-center justify-center pressable"
-            style={{
-              background: 'rgb(var(--surface-2))',
-              color: 'rgb(var(--text-muted))',
-            }}
+            className="w-10 h-10 flex items-center justify-center pressable"
           >
-            <BarChart3 size={18} strokeWidth={2} />
+            <Image
+              src={barChartIcon}
+              alt="گزارش‌ها"
+              width={32}
+              height={32}
+              className="w-8 h-8 object-contain drop-shadow-sm"
+              unoptimized
+            />
           </button>
         )}
         <button
           type="button"
           aria-label="تنظیمات"
           onClick={onSettingsClick}
-          className="w-9 h-9 rounded-full flex items-center justify-center pressable"
-          style={{
-            background: 'rgb(var(--surface-2))',
-            color: 'rgb(var(--text-muted))',
-          }}
+          className="w-10 h-10 flex items-center justify-center pressable"
         >
-          <SettingsIcon size={18} strokeWidth={2} />
+          <Image
+            src={settingsIcon}
+            alt="تنظیمات"
+            width={32}
+            height={32}
+            className="w-8 h-8 object-contain drop-shadow-sm"
+            unoptimized
+          />
         </button>
       </div>
     </header>
@@ -313,11 +323,21 @@ function YearTotalCard({
             }}
           />
           <Image
-            src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/icons/thamar.png`}
+            src={thamarIconLargeLight}
             alt="ثمر"
             width={180}
             height={180}
-            className="w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 lg:w-44 lg:h-44 object-contain select-none transition-transform duration-300 hover:scale-105 relative z-10 dark:brightness-115 dark:contrast-110 dark:drop-shadow-[0_0_18px_rgba(95,168,143,0.35)]"
+            className="w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 lg:w-44 lg:h-44 object-contain select-none transition-transform duration-300 hover:scale-105 relative z-10 dark:hidden"
+            priority
+            unoptimized
+            referrerPolicy="no-referrer"
+          />
+          <Image
+            src={thamarIconLargeDark}
+            alt="ثمر"
+            width={180}
+            height={180}
+            className="w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 lg:w-44 lg:h-44 object-contain select-none transition-transform duration-300 hover:scale-105 relative z-10 hidden dark:block dark:brightness-115 dark:contrast-110 dark:drop-shadow-[0_0_18px_rgba(95,168,143,0.35)]"
             priority
             unoptimized
             referrerPolicy="no-referrer"
@@ -334,7 +354,7 @@ function LoadingScreen() {
       <div className="card max-w-md w-full p-6 text-center">
         <div className="inline-flex items-center justify-center mb-3">
           <Image
-            src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/icons/icon.png`}
+            src={thamarIcon}
             alt="ثمر"
             width={64}
             height={64}

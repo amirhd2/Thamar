@@ -27,6 +27,11 @@ import Image from 'next/image';
 import { CountUp } from './CountUp';
 import { formatCompact, formatPercent } from '@lib/format';
 import { SEASONS_FA, SEASON_MONTHS, JALALI_MONTHS_FA, faNum, type Season, type DigitPref } from '@lib/jalali';
+import type { StaticImageData } from 'next/image';
+import springImage from '../../../public/illustrations/spring.webp';
+import summerImage from '../../../public/illustrations/summer.webp';
+import autumnImage from '../../../public/illustrations/autumn.webp';
+import winterImage from '../../../public/illustrations/winter.webp';
 
 interface SeasonCardProps {
   season: Season;
@@ -38,11 +43,11 @@ interface SeasonCardProps {
   onClick?: () => void;
 }
 
-const SEASON_IMAGES: Record<Season, string> = {
-  spring: '/icons/spring.png',
-  summer: '/icons/summer.png',
-  autumn: '/icons/autumn.png',
-  winter: '/icons/winter.png',
+const SEASON_IMAGES: Record<Season, StaticImageData> = {
+  spring: springImage,
+  summer: summerImage,
+  autumn: autumnImage,
+  winter: winterImage,
 };
 
 /** Season accent colors — match the tint but a bit deeper for contrast. */
@@ -93,7 +98,7 @@ export function SeasonCard({
         className="absolute left-1 md:left-2 top-1/2 -translate-y-1/2 w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 lg:w-44 lg:h-44 pointer-events-none select-none z-0 opacity-20 dark:opacity-25 group-hover:opacity-35 dark:group-hover:opacity-40 transition-all duration-300 group-hover:scale-105"
       >
         <Image
-          src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}${SEASON_IMAGES[season]}`}
+          src={SEASON_IMAGES[season]}
           alt={SEASONS_FA[season]}
           width={180}
           height={180}
